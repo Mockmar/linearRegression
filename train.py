@@ -18,6 +18,9 @@ def normalize(values, mean, std):
 def R2(y, y_pred):
     return 1 - (sum((y - y_pred) ** 2) / sum((y - y.mean()) ** 2))
 
+def predict(mileage):
+    return A * mileage + B
+
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Usage : python train.py <path_data> <path_model>")
@@ -61,11 +64,11 @@ if __name__ == "__main__":
     plt.title("Régression linéaire - Entraînement")
 
     for i in range(EPOCH):
-        y_pred = A * km_norm + B
-        da = (-2 / m) * sum(km_norm * (price_norm - y_pred))
-        db = (-2 / m) * sum(price_norm - y_pred)
-        A = A - L * da
-        B = B - L * db
+        y_pred = predict(km_norm)
+        tmpB = L * (1 / m) * sum(price_norm - y_pred)
+        tmpA = L * (1 / m) * sum((price_norm - y_pred) * km_norm)
+        A += tmpA
+        B += tmpB
 
         if i % EPOCH_DISPLAY == 0 or i == EPOCH - 1:
             line.set_ydata(A * km_norm + B)
@@ -77,9 +80,9 @@ if __name__ == "__main__":
     plt.ioff()
     plt.show()
 
-    y_pred = A * km_norm + B
+    y_pred = predict(km_norm)
     r2 = R2(price_norm, y_pred)
-    print(f"R2 = {r2:.2f}")
+    print(f"R2 = {r2:.3f}")
 
     with open(path_model, 'w') as f:
         f.write(f"{A},{B}\n")
