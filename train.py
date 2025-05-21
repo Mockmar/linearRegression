@@ -1,10 +1,12 @@
 import matplotlib
-matplotlib.use('gtk3agg')  # Assurez-vous que vous avez les dépendances GTK installées
+# matplotlib.use('gtk3agg')  # Assurez-vous que vous avez les dépendances GTK installées
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
 import time
+import seaborn as sns
+
 
 A = 0
 B = 0
@@ -41,6 +43,11 @@ if __name__ == "__main__":
 
     km = np.array(df['km'])
     price = np.array(df['price'])
+    plt.scatter(km, price, label="Données brutes")
+    plt.xlabel("Kilométrage")
+    plt.ylabel("Prix")
+    plt.title("Prix voiture fonction du kilométrage")
+    plt.show()
 
     if len(km) == 0 or len(price) == 0:
         print("Erreur : le fichier de données est vide.")
@@ -84,8 +91,12 @@ if __name__ == "__main__":
     r2 = R2(price_norm, y_pred)
     print(f"R2 = {r2:.3f}")
 
+    A = A * price_normalize[1] / km_normalize[1]
+    B = B * price_normalize[1] + price_normalize[0] - A * km_normalize[0]
+
+
     with open(path_model, 'w') as f:
         f.write(f"{A},{B}\n")
-        f.write(f"{km_normalize[0]},{km_normalize[1]}\n")
-        f.write(f"{price_normalize[0]},{price_normalize[1]}\n")
+        # f.write(f"{km_normalize[0]},{km_normalize[1]}\n")
+        # f.write(f"{price_normalize[0]},{price_normalize[1]}\n")
 
