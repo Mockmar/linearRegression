@@ -1,6 +1,6 @@
 # Linear Regression - Estimation du prix d'une voiture
 
-Ce projet implémente une régression linéaire simple pour estimer le prix d'une voiture d'occasion en fonction de son kilométrage.
+Ce projet implémente une régression linéaire avec gradient de descente pour estimer le prix d'une voiture d'occasion en fonction de son kilométrage.
 
 ## Fichiers
 
@@ -44,7 +44,3 @@ Installez-les avec :
 ```bash
 pip install numpy pandas matplotlib seaborn
 ```
-
-## Auteur
-
-Projet réalisé par [Votre Nom]
