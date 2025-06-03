@@ -1,4 +1,5 @@
 import sys
+import json
 
 def extract_model(path_model):
     try:
@@ -17,22 +18,12 @@ def extract_model(path_model):
 
     data = [line.strip() for line in data if line.strip()]
     thetas = data[0].strip().split(",")
-    # normalize_km = data[1].strip().split(",")
-    # normalize_price = data[2].strip().split(",")
-    # if len(normalize_km) != 2:
-    #     print("Erreur : fichier ne contient pas deux valeurs de normalisation")
-    #     sys.exit(1)
-    # if len(normalize_price) != 2:
-    #     print("Erreur : fichier ne contient pas deux valeurs de normalisation")
-    #     sys.exit(1)
     if len(thetas) != 2:
         print("Erreur : fichier ne contient pas deux valeurs de theta")
         sys.exit(1)
 
     try:
         thetas = [float(theta) for theta in thetas]
-        # normalize_km = [float(n) for n in normalize_km]
-        # normalize_price = [float(n) for n in normalize_price]
     except ValueError:
         print("Erreur : valeurs de theta non valides")
         sys.exit(1)
@@ -41,7 +32,6 @@ def extract_model(path_model):
     print(f"    theta0 = {thetas[0]}")
     print(f"    theta1 = {thetas[1]}")
 
-    # return thetas, normalize_km, normalize_price
     return thetas
 
 def predict(mileage, thetas):
@@ -66,15 +56,10 @@ if __name__ == "__main__":
         sys.exit(1)
 
     path_model = sys.argv[2]
-    # thetas, normalize_km, normalize_price = extract_model(path_model)
     thetas = extract_model(path_model)
 
     try:
-        # mileage = normalize(mileage, normalize_km)
         price = predict(mileage, thetas)
-        # if normalize_price[1] == 0:
-        #     raise ValueError("Erreur : la valeur de normalisation ne peut pas être nulle.")
-        # price = price * normalize_price[1] + normalize_price[0]
     except ValueError as e:
         print(f"{e}")
         sys.exit(1)

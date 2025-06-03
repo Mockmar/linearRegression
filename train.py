@@ -1,11 +1,12 @@
 import matplotlib
-# matplotlib.use('gtk3agg')  # Assurez-vous que vous avez les dépendances GTK installées
+# matplotlib.use('gtk3agg')
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
 import time
 import seaborn as sns
+import json
 
 
 A = 0
