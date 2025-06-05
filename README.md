@@ -17,6 +17,8 @@ Ce projet implémente une régression linéaire avec gradient de descente pour e
 python train.py data.csv model.txt
 ```
 
+![Animation de la régression](training.gif)
+
 ### 2. Prédire un prix
 
 ```bash
@@ -30,8 +32,6 @@ Remplacez `<kilométrage>` par la valeur souhaitée (ex: 50000).
 ```bash
 python predict.py 50000 model.txt
 ```
-
-![Animation de la régression](training.gif)
 
 ## Dépendances
 
