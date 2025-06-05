@@ -31,6 +31,8 @@ Remplacez `<kilométrage>` par la valeur souhaitée (ex: 50000).
 python predict.py 50000 model.txt
 ```
 
+![Animation de la régression](training.gif)
+
 ## Dépendances
 
 - Python 3.x
